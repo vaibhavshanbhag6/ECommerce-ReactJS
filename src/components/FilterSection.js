@@ -2,9 +2,11 @@ import React from 'react'
 import { FaCheck } from 'react-icons/fa';
 import styled from 'styled-components';
 import { useFilterContext } from '../context/filtercontext';
+import FormatPrice from './Helpers/FormatPrice';
+import { Button } from '../styles/Button';
 
 const FilterSection = () => {
-    const {filter: {text, category, company, color}, updateFilterValue, all_products} = useFilterContext();
+    const {filter: {text, category, company, color, price, minPrice, maxPrice}, updateFilterValue, all_products, clearFilters} = useFilterContext();
 
     const getUniqueData = (products, prop) =>{
         let data = products.map((curElem)=>curElem[prop]);
@@ -26,8 +28,6 @@ const FilterSection = () => {
     const getCategoryData = getUniqueData(all_products, "category");
     const companyData = getUniqueData(all_products, "company");
     const colorData = getUniqueData(all_products, "colors");
-
-    console.log(colorData);
 
 
 
@@ -120,6 +120,29 @@ const FilterSection = () => {
           })}
         </div>
       </div>
+
+      <div className="filter_price">
+        <h3>Price</h3>
+        <p>
+          <FormatPrice price={price} />
+        </p>
+        <input
+          type="range"
+          name="price"
+          min={minPrice}
+          max={maxPrice}
+          step="100000"
+          value={price}
+          onChange={updateFilterValue}
+        />
+      </div>
+
+      <div className="filter-clear">
+        <Button className="btn" onClick={clearFilters}>
+          Clear Filters
+        </Button>
+      </div>
+
     </Wrapper>
   )
 }
@@ -211,7 +234,7 @@ const Wrapper = styled.section`
     gap: 1rem;
   }
   .filter-clear .btn {
-    background-color: #ec7063;
+    background-color: ${({theme})=>theme.colors.btn};
     color: #000;
   }
 `;
