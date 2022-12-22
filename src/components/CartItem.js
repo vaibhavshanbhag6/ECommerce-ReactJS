@@ -4,14 +4,17 @@ import { QtyToggle } from "./QtyToggle";
 import { FaTrash } from "react-icons/fa";
 import { useCartContext } from "../context/cartcontext";
 
-const CartItem = ({ id, name, image, color, price, qty }) => {
-  const { removeItem } = useCartContext();
+const CartItem = ({ id, name, image, color, price, qty, max }) => {
+  const { removeItem, updateQty } = useCartContext();
+
   const setDecrease = () => {
-    // amount > 1 ? setAmount(amount - 1) : setAmount(1);
+    if(qty > 1)
+      updateQty(id, "DECREMENT_QTY");
   };
 
   const setIncrease = () => {
-    // amount < stock ? setAmount(amount + 1) : setAmount(stock);
+    if(qty<max)
+      updateQty(id, "INCREMENT_QTY");
   };
 
   return (

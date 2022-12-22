@@ -3,11 +3,18 @@ import { useFilterContext } from '../context/filtercontext';
 import GridView from './GridView';
 import ListView from './ListView';
 import styled from 'styled-components';
+import { useProductContext } from '../context/productcontext';
 
 
 const ProductList = () => {
 
   const {filter_products, grid_view} = useFilterContext();
+  const {isLoading} = useProductContext();
+
+  if(isLoading)
+  return <EmptyDiv>
+      <h3>Loading!!!</h3>
+        </EmptyDiv>;
 
   if(filter_products.length === 0)
     return <EmptyDiv>

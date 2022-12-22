@@ -9,8 +9,7 @@ export const CartProvider = ({children}) =>{
     const initialState = {
         // cart: [],
         cart: localStorage.getItem("CartData") === null ? [] : JSON.parse(localStorage.getItem("CartData")),
-        total_item: "",
-        total_amount: "",
+        total_price: 0,
         shipping_fee: 50000,
       };
 
@@ -29,12 +28,18 @@ export const CartProvider = ({children}) =>{
         dispatch({type: "CLEAR_CART"});
     }
 
+    const updateQty = (cartId, prop) =>{
+        dispatch({type: "UPDATE_QTY", payload: {cartId, prop}})
+
+    }
+
     useEffect(()=>{
         localStorage.setItem("CartData",JSON.stringify(state.cart));
+        dispatch({type:"GET_TOTAL_PRICE"})
     },[state.cart]);
 
 
-    return <CartContext.Provider value={{...state, addToCart, removeItem, clearCart}}>{children}</CartContext.Provider>;
+    return <CartContext.Provider value={{...state, addToCart, removeItem, clearCart, updateQty}}>{children}</CartContext.Provider>;
 
 }
 

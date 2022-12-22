@@ -54,6 +54,43 @@ const cartReducer = (state, action) =>{
                 ...state,
                 cart : [],
             }
+
+        case "UPDATE_QTY":
+            let {cartId, prop} = action.payload;
+
+            let updatedCart = state.cart.map((curElem)=>{
+                    if (curElem.id === cartId)
+                        if(prop === "INCREMENT_QTY") 
+                            return {
+                            ...curElem,
+                            qty:curElem.qty+1,
+                            }
+                        if(prop === "DECREMENT_QTY") 
+                            return {
+                            ...curElem,
+                            qty:curElem.qty-1,
+                            }
+                    else
+                        return curElem;
+                })
+
+                return {
+                    ...state,
+                    cart: updatedCart,
+                }
+
+        case "GET_TOTAL_PRICE":
+
+                let totalPrice = state.cart.reduce((acc, curElem)=>{
+                    acc = acc + (curElem.qty*curElem.price);
+                    return acc;
+                },0)
+
+                return{
+                    ...state,
+                    total_price: totalPrice,
+                }
+
         default:
             return state;
     }
