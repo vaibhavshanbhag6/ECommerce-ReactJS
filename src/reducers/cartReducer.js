@@ -59,7 +59,7 @@ const cartReducer = (state, action) =>{
             let {cartId, prop} = action.payload;
 
             let updatedCart = state.cart.map((curElem)=>{
-                    if (curElem.id === cartId)
+                    if (curElem.id === cartId){
                         if(prop === "INCREMENT_QTY") 
                             return {
                             ...curElem,
@@ -70,9 +70,10 @@ const cartReducer = (state, action) =>{
                             ...curElem,
                             qty:curElem.qty-1,
                             }
-                    else
+                    }
+                    
                         return curElem;
-                })
+                });
 
                 return {
                     ...state,

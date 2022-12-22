@@ -13,7 +13,7 @@ const CartItem = ({ id, name, image, color, price, qty, max }) => {
   };
 
   const setIncrease = () => {
-    if(qty<max)
+    if(qty < max)
       updateQty(id, "INCREMENT_QTY");
   };
 
