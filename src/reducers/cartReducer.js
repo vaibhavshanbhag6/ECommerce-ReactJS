@@ -71,7 +71,6 @@ const cartReducer = (state, action) =>{
                             qty:curElem.qty-1,
                             }
                     }
-                    
                         return curElem;
                 });
 

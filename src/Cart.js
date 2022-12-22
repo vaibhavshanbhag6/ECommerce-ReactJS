@@ -11,6 +11,9 @@ const Cart = () => {
   if(cart.length === 0)
       return <EmptyDiv>
         <h3>No Item in Cart!!!</h3>
+        <NavLink to="/products">
+            <Button> continue Shopping </Button>
+          </NavLink>
       </EmptyDiv>
 
   return <Wrapper>
