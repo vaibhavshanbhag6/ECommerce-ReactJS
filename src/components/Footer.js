@@ -49,7 +49,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <a
-                    href="https://www.youtube.com/channel/UCwfaAHy4zQUb2APNOGXUCCA"
+                    href="https://www.youtube.com/"
                     >
                     <FaYoutube className="icons" />
                   </a>
